@@ -2,8 +2,9 @@ package com.rajdroid.daggerdemo.model
 
 data class User(
 
-	val avatarUrl: String? = null,
-	val name: Any? = null
+
+	val avatar_url: String? = null,
+	val name: String? = null
 
 )
 
