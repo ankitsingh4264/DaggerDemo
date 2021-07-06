@@ -7,10 +7,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-abstract class RetroModule {
+ class RetroModule {
 
-    val baseURL = "https://api.github.com/search/"//repositories?q=newyork
-
+    val baseURL = "https://api.github.com/"
     @Singleton
     @Provides
     fun getRetroServiceInterface(retrofit: Retrofit):RetroServiceInterface {

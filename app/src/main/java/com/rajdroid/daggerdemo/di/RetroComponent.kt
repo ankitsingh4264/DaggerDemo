@@ -8,5 +8,5 @@ import javax.inject.Singleton
 @Component(modules = [RetroModule::class])
 interface RetroComponent {
 
-    fun inject(mainActivityViewModel: MainActivityViewModel)
+
 }
