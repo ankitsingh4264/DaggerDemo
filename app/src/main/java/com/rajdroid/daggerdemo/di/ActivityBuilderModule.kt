@@ -9,9 +9,7 @@ import javax.inject.Named
 
 @Module
 abstract class ActivityBuilderModule {
-    @ContributesAndroidInjector(
-        modules = [ViewModelModule::class]
-    )
+    @ContributesAndroidInjector
     abstract fun contributeMainActivity(): MainActivity
 
 
@@ -19,7 +17,7 @@ abstract class ActivityBuilderModule {
 //            @Provides
 //            @Named("1")
 //            fun  someString(): String{
-//        return "this is a test string"
+//        return "this is a test string rajiv  1"
 //        }
 //
 //
