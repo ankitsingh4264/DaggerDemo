@@ -13,3 +13,11 @@ class RepoTest  @Inject  constructor(
         Toast.makeText(application,"test for rajiv",Toast.LENGTH_SHORT).show()
     }
 }
+
+
+// implement repo as a interface
+// use case btw view model and repo (async task)
+//
+
+//understanding  coroutine , jobs, runner
+

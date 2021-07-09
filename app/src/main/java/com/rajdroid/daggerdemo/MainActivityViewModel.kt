@@ -5,8 +5,13 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.rajdroid.daggerdemo.di.RetroServiceInterface
 import com.rajdroid.daggerdemo.model.User
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -26,28 +31,26 @@ class MainActivityViewModel @Inject constructor( val retroService: RetroServiceI
     val data : MutableLiveData<User> = MutableLiveData();
 
 
-    fun getUser( id:String){
+    suspend fun getUser(id:String) : User? {
 
-        val res= retroService.getDataFromAPI(id)
-        res!!.enqueue( object : retrofit2.Callback<User>{
-            override fun onResponse(call: Call<User>, response: Response<User>) {
+//        val res= retroService.getDataFromAPI(id)
 
-                val body=response.body()
-                Log.d("ankit", "onResponse: $response")
-                if (body!=null){
-                    data.value=body;
-                }else{
-                    data.value=null
-                }
+       val response= viewModelScope.async {
+            retroService.getDataFromAPI(id)
+        }
+        var userResult:User?=null
+        userResult = if (response.await().isSuccessful){
+            response.await().body();
 
-            }
+        }else{
+            null;
+        }
 
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
 
-          }
-        )
+       return  userResult
+
+
+      
     }
 
 }
